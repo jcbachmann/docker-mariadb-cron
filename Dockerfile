@@ -12,11 +12,6 @@ COPY ./entrypoint.sh /
 
 RUN chmod +x entrypoint.sh
 
-ENTRYPOINT [ \
-    "/entrypoint.sh", \
-]
+ENTRYPOINT ["/entrypoint.sh"]
 
-CMD [ \
-    "/sbin/cron", \
-    "-f",\
-]
+CMD ["/sbin/cron", "-f"]
