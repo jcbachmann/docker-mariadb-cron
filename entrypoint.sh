@@ -2,6 +2,10 @@
 
 set -euxo pipefail
 
-echo "$CRONTAB" > /etc/crontab
+if [ -n ${CRONTAB+x} ]; then
+    echo "$CRONTAB" | crontab -
+else
+    echo "You can set crontab's content using env var CRONTAB"
+fi
 
-exec tini "$@"
+exec "$@"

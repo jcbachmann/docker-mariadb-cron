@@ -15,4 +15,4 @@ RUN chmod +x entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["/sbin/cron", "-f"]
+CMD ["tini", "/sbin/cron", "--", "-f"]
