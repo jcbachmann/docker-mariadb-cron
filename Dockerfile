@@ -5,6 +5,7 @@ RUN true \
     && apt update \
     && apt install -y \
         cron \
+        tini \
     && rm -rf /var/lib/apt \
     && true
 

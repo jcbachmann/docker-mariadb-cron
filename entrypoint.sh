@@ -4,4 +4,4 @@ set -euxo pipefail
 
 echo "$CRONTAB" > /etc/crontab
 
-exec "$@"
+exec tini "$@"
