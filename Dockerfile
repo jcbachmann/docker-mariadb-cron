@@ -8,6 +8,14 @@ RUN true \
     && rm -rf /var/lib/apt \
     && true
 
+COPY ./entrypoint.sh /
+
+RUN chmod +x entrypoint.sh
+
+ENTRYPOINT [ \
+    "/entrypoint.sh", \
+]
+
 CMD [ \
     "/sbin/cron", \
     "-f",\
