@@ -41,7 +41,7 @@ docker build -t mariadb-cron-tini .
 To run the container with default settings:
 
 ```sh
-docker run -d --name my_mariadb -e MYSQL_ROOT_PASSWORD=rootpassword mariadb-cron-tini
+docker run -d --name my_mariadb -e MARIADB_ROOT_PASSWORD=rootpassword mariadb-cron-tini
 ```
 
 ### Using Cron
@@ -50,7 +50,7 @@ You can set up cron jobs by passing the `CRONTAB` environment variable. For exam
 
 ```sh
 docker run -d --name my_mariadb \
- -e MYSQL_ROOT_PASSWORD=rootpassword \
+ -e MARIADB_ROOT_PASSWORD=rootpassword \
  -e CRONTAB="\* \* \* \* \* /usr/bin/mariadb-dump --host=my_mariadb --user=root --password=rootpassword --all-databases > /backups/my_mariadb-all_databases.sql" \
  mariadb-cron-tini
 ```
@@ -71,10 +71,10 @@ services:
     image: mariadb:latest
     restart: always
     environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_RANDOM_ROOT_PASSWORD: '1'
     volumes:
       - db_data:/var/lib/mysql
     networks:
@@ -84,7 +84,7 @@ services:
       test:
         [
           'CMD-SHELL',
-          'mysqladmin ping -h localhost -u${MYSQL_USER} -p${MYSQL_PASSWORD}',
+          'mysqladmin ping -h localhost -u${MARIADB_USER} -p${MARIADB_PASSWORD}',
         ]
       interval: 30s
       timeout: 10s
@@ -119,9 +119,9 @@ networks:
 This example assumes that you have a `.env` file in the same directory as the `docker-compose.yml` file with the following content:
 
 ```sh
-MYSQL_DATABASE=mydatabase
-MYSQL_USER=myuser
-MYSQL_PASSWORD=mypassword
+MARIADB_DATABASE=mydatabase
+MARIADB_USER=myuser
+MARIADB_PASSWORD=mypassword
 ```
 
 The example also assumes that you have the `Dockerfile` and `entrypoint.sh` files in the same directory as the `docker-compose.yml` file.
