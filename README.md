@@ -102,7 +102,7 @@ services:
       - /backups:/backups:rw
     environment:
       CRONTAB: |
-        * * * * * bash -c "mariadb-dump --host=db --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} | gzip -9 > /backups/db-all_databases.sql.gz"
+        * * * * * bash -c "mariadb-dump --host=db --user=${MARIADB_USER} --password=${MARIADB_PASSWORD} | gzip -9 > /backups/db-all_databases.sql.gz"
     networks:
       - default
 
